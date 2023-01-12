@@ -80,7 +80,7 @@
             </ul>
             <div class="card-body">
                 <a href="index.php" class="card-link">Voltar</a>
-                <a href="produtos.php" class="card-link">Lista de Produtos</a><a href="?<?='id='. $id ."&adicionar=". $objEstoque->getIdEstoque()  ?>" <?= (!isset($estoque['qtd']) || $estoque['qtd'] < 1 ) ?'hidden' : '' ?> class="card-link">Adicionar ao carrinho</a>
+                <a href="produtos.php" class="card-link">Lista de Produtos</a><a href="?<?='id='. $id ."&adicionar=". $objEstoque->getProduto()->getIdProduto()  ?>" <?= (!isset($estoque['qtd']) || $estoque['qtd'] < 1 ) ?'hidden' : '' ?> class="card-link">Adicionar ao carrinho</a>
             </div>
         </div> -->
         <div class="card">
@@ -97,7 +97,7 @@
             </ul>
             <div class="card-body">
                 <a href="index.php" class="card-link">Voltar</a>
-                <a href="produtos.php" class="card-link">Lista de Produtos</a><a href="?<?='id='. $id ."&adicionar=". $objEstoque->getIdEstoque()  ?>" <?= (!isset($estoque['qtd']) || $estoque['qtd'] < 1 ) ?'hidden' : '' ?> class="card-link">Adicionar ao carrinho</a>
+                <a href="produtos.php" class="card-link">Lista de Produtos</a><a href="?<?='id='. $id ."&adicionar=". $objEstoque->getProduto()->getIdProduto()  ?>" <?= (!isset($estoque['qtd']) || $estoque['qtd'] < 1 ) ?'hidden' : '' ?> class="card-link">Adicionar ao carrinho</a>
             </div>
         </div>
 		</main>

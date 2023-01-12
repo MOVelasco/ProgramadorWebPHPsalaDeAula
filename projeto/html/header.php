@@ -197,38 +197,49 @@ if(!isset($_SESSION)){
 
 		unset($_GET['remover']);
 		echo '<script defer>
+		let dominio = window.location.host;
+		let end = window.location.href;// mais_detalhes.php
+		let finalEnd = end.indexOf("."); // posição do caracter "."
+		let tamanhoPasta = "http//:/php/projeto/".length;
+		let pagina = "";
+
+		if(dominio.indexOf("localhost") >= 0){
+			pagina = end.substr((dominio.length + tamanhoPasta), finalEnd); // mais_detalhes
+		} else {
+			pagina = end.substr((dominio.length + 1), finalEnd); // mais_detalhes
+		}
+
+		pagina = pagina.substr(0, pagina.indexOf("."));
+		let idItemRemovido = end.substr(end.indexOf("=")+1, end.length);
+		console.log("Domínio: "+ dominio);
+		console.log("tamanho do domínio: "+ dominio.length + " + 9 = "+ (dominio.length +9));
+		console.log("Tamanho da pasta: "+ tamanhoPasta);
+		console.log("Pagina: "+ pagina);
+		console.log("Endereço 1: "+ end);
+		console.log("Tamanho do Endereço 1: "+ end.length);
+		console.log("Posição do Ponto do Endereço 1: "+ end.indexOf("."));
+			if(pagina == "mais_detalhes"){
+				end = end.substr(0, end.indexOf("?"));
+				end = end + "?id=" + idItemRemovido;
+				// end = pagina + ".php?id=" + idItemRemovido;
+			} else {
+				end = end.substr(0, end.indexOf("?"));
+				// end = end + "Teste";
+			}
 	
+			console.log("Endereço 2: " + end);
+			window.location.href=""+end;
 		</script>';
 
 	}
 ?>
-<script>
+<!-- <script>
+
+		
+		
     const btn = document.querySelector("#excluir")
 	
-	let dominio = window.location.host;
-	let end = window.location.href;// mais_detalhes.php
-	let finalEnd = end.indexOf("."); // posição do caracter "."
-	let pagina = end.substr((dominio.length + 9), finalEnd); // mais_detalhes
-	pagina = pagina.substr(0, pagina.indexOf("."));
-	let idItemRemovido = end.substr(end.indexOf("=")+1, end.length);
-	console.log("Domínio: "+ dominio);
-	console.log("tamanho do domínio: "+ dominio.length + " + 9 = "+ (dominio.length +9));
-	console.log("Pagina: "+ pagina);
-	console.log("Endereço 1: "+ end);
-	console.log("Tamanho do Endereço 1: "+ end.length);
-	console.log("Posição do Ponto do Endereço 1: "+ end.indexOf("."));
-		if(pagina == "mais_detalhes"){
-			end = end.substr(0, end.indexOf("?"));
-			end = end + "?id=" + idItemRemovido;
-			// end = pagina + ".php?id=" + idItemRemovido;
-		} else {
-			end = end.substr(0, end.indexOf("?"));
-			// end = end + "Teste";
-		}
-
-		console.log("Endereço 2: " + end);
-		//window.location.href=""+end;
     bnt.addEventListener('click', () =>{
         // location.reload()
     })
-</script>
+</script> -->

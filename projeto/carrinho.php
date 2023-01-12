@@ -9,10 +9,11 @@ if(isset($_GET['adicionar'])){
             $_SESSION['carrinho'][$idItem]['qtd']++;
         }else{
             $_SESSION['carrinho'][$idItem] = array(
-                'idEstoque' => $idItem, 
+                'idProduto' => $idItem, 
                 'produto' => $objEstoque->getProduto()->getNome(), 
                 'valor' => $objEstoque->getValorVenda(), 
-                'qtd' => 1, 'obj' => serialize($objEstoque) );
+                'qtd' => 1,
+                'obj' => serialize($objEstoque) );
         }
 
         echo "<script>alert('O item foi adicionado ao carrinho.');</script>";
@@ -36,6 +37,8 @@ if(isset($_SESSION['carrinho'])){
         echo "Valor: " . $value['valor'];
         echo "<br>";
         echo "Valor x QTD: " . number_format($value['valor'] * $value['qtd'], 2, ',', '.');
+        echo "<br>";
+        echo "OBJ: " . unserialize($value['obj'])->getProduto()->getNome() ;
         echo "<br><hr>";
     }
 }

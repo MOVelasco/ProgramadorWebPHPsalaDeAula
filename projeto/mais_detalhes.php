@@ -96,8 +96,9 @@
                 <li class="list-group-item">Valor: R$ <?= $estoque['valor_venda'] ?> </li>
             </ul>
             <div class="card-body">
-                <a href="index.php" class="card-link">Voltar</a>
-                <a href="produtos.php" class="card-link">Lista de Produtos</a><a href="?<?='id='. $id ."&adicionar=". $objEstoque->getProduto()->getIdProduto()  ?>" <?= (!isset($estoque['qtd']) || $estoque['qtd'] < 1 ) ?'hidden' : '' ?> class="card-link">Adicionar ao carrinho</a>
+                <a href="index.php" type="button" class="btn btn-outline-secondary">Voltar</a>
+                <a href="produtos.php" type="button" class="btn btn-outline-warning">Lista de Produtos</a>
+                <a href="?<?='id='. $id ."&adicionar=". $objEstoque->getProduto()->getIdProduto()  ?>" <?= (!isset($estoque['qtd']) || $estoque['qtd'] < 1 ) ?'hidden' : '' ?>  type="button" class="btn btn-outline-success">Adicionar ao carrinho</a>
             </div>
         </div>
 		</main>

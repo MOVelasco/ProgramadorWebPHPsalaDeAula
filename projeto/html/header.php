@@ -200,11 +200,11 @@ if(!isset($_SESSION)){
 		let dominio = window.location.host;
 		let end = window.location.href;// mais_detalhes.php
 		let finalEnd = end.indexOf("."); // posição do caracter "."
-		let tamanhoPasta = "http//:/php/projeto/".length;
+		let tamanhoPasta = "/php/projeto/".length;
 		let pagina = "";
-
-		if(dominio.indexOf("localhost") >= 0){
-			pagina = end.substr((dominio.length + tamanhoPasta), finalEnd); // mais_detalhes
+		let posicao = end.indexOf("localhost"); 
+		if( posicao >= 0){
+			pagina = end.substr((posicao + dominio.length + tamanhoPasta), finalEnd); // mais_detalhes
 		} else {
 			pagina = end.substr((dominio.length + 1), finalEnd); // mais_detalhes
 		}
@@ -229,17 +229,18 @@ if(!isset($_SESSION)){
 	
 			console.log("Endereço 2: " + end);
 			window.location.href=""+end;
+			
 		</script>';
 
 	}
 ?>
-<!-- <script>
-
+<script>
 		
-		
-    const btn = document.querySelector("#excluir")
+    // const btn = document.querySelector("#excluir")
 	
-    bnt.addEventListener('click', () =>{
-        // location.reload()
-    })
-</script> -->
+    // bnt.addEventListener('click', () =>{
+	// 	// location.reload()
+	
+    // });
+	
+</script>

@@ -61,7 +61,7 @@
 
     } 
 
-    include_once 'carrinho.php';
+    include_once 'carrinhoGerencia.php';
 
         ?>
 		<main>

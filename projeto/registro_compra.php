@@ -8,14 +8,22 @@
 
 	<body>
 		<?php 
+        include_once "src/protect.php";
 		include "html/header.php";
 		include_once "src/model/Produto.php";
 		include_once "src/model/Estoque.php";
+        include_once "src/conexao.php";
+
+        $id = $_SESSION['id'];
+
 		?>
 
 		<main>
-			<h1>Carrinho de compras</h1>
-			<?php if(isset($_SESSION['carrinho'])) : ?>
+			<h1>Registro de compras</h1>
+			<?php 
+                if(isset($_SESSION['carrinho'])) : 
+            $sql_code = "SELECT * FROM produtos LEFT JOIN estoque ON idproduto = id_produto WHERE idproduto IN (";
+            ?>
 			<div class="table-responsive"> 	
 				<table class="table table-bordered align-middle">
 					<tr>
@@ -32,6 +40,7 @@
 					<?php 
 					$totalCompra = 0;
 					foreach($_SESSION['carrinho'] as $key => $value) :
+                        $sql_code = $sql_code . unserialize($value['obj'])->getProduto()->getIdProduto(). ", ";
 					?>
 					<tr>
 						<td><img width="50" src="<?= unserialize($value['obj'])->getProduto()->getFoto() ?>"></td>
@@ -54,6 +63,8 @@
 					</tr>
 					<?php
 					endforeach;
+                    $sql_code = substr($sql_code, 0, (strlen($sql_code) -2));
+                    $sql_code = $sql_code . ");";
 					?>
 					<tr>
 						<td colspan="7" style="text-align: center;">TOTAL</td>
@@ -65,6 +76,33 @@
 			<?php else :
 			echo "<h3 style='text-align: center; margin-top: 50px'>Não há produtos no carrinho no momento.</h3>";
 			endif;
+
+            $podeRegistrar = true;
+            $texto = "Não possuímos a(s) quantidade(s) do(s) produto(s) solicitado: "; 
+
+            $sql_query = $conexao->query($sql_code);
+            $lista = [];
+            if($sql_query->num_rows > 0){
+                $lista = $sql_query->fetch_all(MYSQLI_ASSOC);
+            }
+
+            foreach($lista as $registro){
+                $qtdSolicitado = $_SESSION['carrinho'][$registro['idproduto']]['qtd'];
+                if($registro['qtd'] < $qtdSolicitado){
+                    $podeRegistrar = false;
+                    $texto = $texto . "\\n" . $qtdSolicitado . " - " . $registro['nome'];
+                } else {
+                    // SQL PARA REGISTRAR NAS 2 TABELAS (ESTOQUE & HISTORICO_COMPRA)
+                }
+             }
+
+             
+             if($podeRegistrar){
+                 echo "<script> alert('REGISTRADO!'); </script>";
+             } else {
+                echo "<script> alert('". $texto ."'); </script>";
+             }
+
 			?>
 			<div style="text-align: center;">
 				<a href="produtos.php" type="button" class="btn btn-success btn-lg">Continuar Comprando</a>

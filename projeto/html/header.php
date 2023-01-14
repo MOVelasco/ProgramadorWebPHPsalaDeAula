@@ -178,7 +178,7 @@ if(!isset($_SESSION)){
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary">IR PARA O CARRINHO</button>
+        <a href="carrinho.php" type="button" class="btn btn-primary">IR PARA O CARRINHO</a>
       </div>
     </div>
   </div>

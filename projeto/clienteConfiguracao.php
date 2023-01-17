@@ -89,7 +89,7 @@
 			</div>
 			</a>
 			
-			<a href="#" class="linkCustomizado <?= ('' == '') ? 'text-primary' : 'text-danger' ?>">
+			<a href="historico_compra.php" class="linkCustomizado <?= ('' == '') ? 'text-primary' : 'text-danger' ?>">
 			<div class="col">
 				<div class="card">
 						<i class="bi bi-table text-center" style='font-size: 10rem;'></i>

@@ -37,8 +37,11 @@
     $sql_code = "SELECT * FROM produtos LEFT JOIN estoque ON idproduto = id_produto WHERE idproduto = '$id'";
     $sql_query = $conexao->query($sql_code);
     
+    $listaProdutos = [];
+
     if ($sql_query->num_rows > 0) {
-        $produto = $sql_query->fetch_assoc();
+        // $produto = $sql_query->fetch_assoc();
+        $listaProdutos = $sql_query->fetch_all(MYSQLI_ASSOC);
     }
 
 
@@ -64,6 +67,7 @@
                     <th>VALOR VENDA</th>
                 </tr>
                 <?php
+                foreach($listaProdutos as $produto) :
                 ?>
                 <tr>
                     <!-- <td><?= $produto['idproduto'] ?></td> -->
@@ -78,6 +82,9 @@
                     <td><?= $produto['valor_compra'] ?></td>
                     <td><?= $produto['valor_venda'] ?></td>
                 </tr>
+                <?php
+                    endforeach;
+                ?>
             </table>
         </div>
         <div class="container-fluid">
